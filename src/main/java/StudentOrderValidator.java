@@ -4,27 +4,40 @@ public class StudentOrderValidator {
     }
 
     static void checkAll() {
-        StudentOrder so = readStudentOrder();
+        while (true) {
 
-        AnswerCityRegister cityAnswer= checkCityRegister(so);
-        AnswerWedding weddingAnswer = checkWedding(so);
-        AnswerChildren childrenAnswer = checkChildren(so);
-        AnswerStudent studentAnswer = checkStudent(so);
+            StudentOrder so = readStudentOrder();
+            System.out.println("Start");
+            if (so == null) {
+                break;//выбрасывает из цикла
+            }
+            AnswerCityRegister cityAnswer = checkCityRegister(so);
+            if(!cityAnswer.success){
+                continue;// на следующую итерацию
+            }
+            AnswerWedding weddingAnswer = checkWedding(so);
+            AnswerChildren childrenAnswer = checkChildren(so);
+            AnswerStudent studentAnswer = checkStudent(so);
 
-        sendMail(so);
+            sendMail(so);
+        }
     }
 
     private static void sendMail(StudentOrder so) {
+        System.out.println("Mail is sending");
 
     }
 
     static StudentOrder readStudentOrder() {
-        StudentOrder so = null;
+        StudentOrder so = new StudentOrder();
         return so;
     }
 
     static AnswerCityRegister checkCityRegister(StudentOrder so) {
         System.out.println("CityRegister is running");
+        AnswerCityRegister answerCityRegister = new AnswerCityRegister();
+        answerCityRegister.success=false;
+
         return new AnswerCityRegister();
     }
 
