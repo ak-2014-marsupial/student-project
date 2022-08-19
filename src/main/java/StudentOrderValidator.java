@@ -24,11 +24,6 @@ public class StudentOrderValidator {
         }
     }
 
-    private static void sendMail(StudentOrder so) {
-        System.out.println("Mail is sending");
-
-    }
-
     static StudentOrder readStudentOrder() {
         StudentOrder so = new StudentOrder();
         return so;
@@ -49,18 +44,22 @@ public class StudentOrderValidator {
     }
 
     private static AnswerWedding checkWedding(StudentOrder so) {
-        System.out.println("Wedding is running");
-
-        return new AnswerWedding();
+        WeddingValidator wd = new WeddingValidator();
+        return wd.checkWedding(so);
     }
 
     private static AnswerChildren checkChildren(StudentOrder so) {
-        System.out.println("Children check is running");
-        return new AnswerChildren();
+        ChildrenValidator cv = new ChildrenValidator();
+        return cv.checkChildren(so);
     }
 
     private static AnswerStudent checkStudent(StudentOrder so) {
-        System.out.println("Students is checking");
-        return new AnswerStudent();
+        StudentValidator sv = new StudentValidator();
+        return sv.checkStudent(so);
+    }
+
+    private static void sendMail(StudentOrder so) {
+        new MailSender().sendMail(so);
+
     }
 }
